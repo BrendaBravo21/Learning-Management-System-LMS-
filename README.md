@@ -1,5 +1,5 @@
 # Sistema de Gestión de Aprendizaje (LMS) - Learning-Management-System-LMS
-Una API backend para un sistema de gestión de aprendizaje diseñada para administrar y organizar cursos, evaluaciones (quizzes, tareas), inscripción de estudiantes, seguimiento del rendimiento y calificaciones. Construida con Java Spring Boot, implementa una arquitectura por capas para escalabilidad y separación de responsabilidades. Proporciona autenticación robusta de usuarios, gestión de contenido del curso y monitoreo del progreso.
+Una API backend para un sistema de gestión de aprendizaje diseñada para administrar y organizar cursos, evaluaciones (quizzes, tareas), inscripción de estudiantes, seguimiento del rendimiento y calificaciones. Construida con Java Spring Boot, implementa una arquitectura por capas para escalabilidad y separación de responsabilidades. Proporciona autenticación robusta de usuarios, gestión de contenido del curso y monitoreo del progreso. Todos los mensajes de la API se encuentran en **español** para una experiencia totalmente localizada.
 
 ## Funcionalidades
 
@@ -121,8 +121,10 @@ cd Learning-Management-System
 ```
 
 #### 2. Configurar `application.yml`:
-- Agrega la información de tu base de datos en la propiedad `datasource`.
-- Agrega la información de correo en la propiedad `mail`.
+- Copia el archivo de ejemplo en `src/main/resources/application.yml`.
+- Ajusta la conexión de base de datos en la propiedad `datasource` con tus credenciales y URL.
+- Configura las propiedades de correo en la sección `mail` para habilitar el envío de notificaciones.
+- Puedes personalizar el usuario inicial (por ejemplo, `brendabravou@gmail.com`) creando un registro en la base de datos o mediante los endpoints de registro.
 
 #### 3. Compilar el proyecto:
 ```bash
