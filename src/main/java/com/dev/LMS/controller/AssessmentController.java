@@ -38,10 +38,10 @@ public class AssessmentController {
             String email = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.getUserByEmail(email);
             if (user == null) {
-                return ResponseEntity.badRequest().body("User not found, Please register or login first");
+                return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
             }
             if (!(user  instanceof Instructor)) {
-                return ResponseEntity.status(405).body("You are not authorized to create an assignment");
+                return ResponseEntity.status(405).body("No está autorizado para crear una tarea");
             }
             Instructor instructor = (Instructor) user;
             System.out.println(question);
@@ -60,10 +60,10 @@ public class AssessmentController {
 
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found, Please register or login first");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
         }
         if (!(user  instanceof Instructor)) {
-            return ResponseEntity.status(403).body("You are not authorized to create an assignment");
+            return ResponseEntity.status(403).body("No está autorizado para crear una tarea");
         }
         try {
             System.out.println(quiz);
@@ -80,10 +80,10 @@ public class AssessmentController {
 
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found, Please register or login first");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
         }
         if (!(user  instanceof Instructor)) {
-            return ResponseEntity.status(403).body("You are not authorized to create an assignment");
+            return ResponseEntity.status(403).body("No está autorizado para crear una tarea");
         }
         try {
             List<QuestionDto> questions = assessmentService.getQuestions(courseName);
@@ -98,10 +98,10 @@ public class AssessmentController {
 
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found, Please register or login first");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
         }
         if (!(user  instanceof Instructor)) {
-            return ResponseEntity.status(403).body("You are not authorized to create an assignment");
+            return ResponseEntity.status(403).body("No está autorizado para crear una tarea");
         }
         try {
            QuestionDto question =  assessmentService.getQuestionById(courseName,questionId);
@@ -119,10 +119,10 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found. Please register or login first.");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero.");
         }
         if (!(user instanceof Student)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only students can take quizzes.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solo los estudiantes pueden realizar cuestionarios.");
         }
 
         try {
@@ -143,14 +143,14 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found. Please register or login first.");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero.");
         }
         if (!(user instanceof Student)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Only students can submit quizzes.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solo los estudiantes pueden enviar cuestionarios.");
         }
         try {
             assessmentService.submitQuiz(courseName, quizName, submittedQuestions,(Student) user);
-            return ResponseEntity.status(HttpStatus.CREATED).body("submitted successfully");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Enviado exitosamente");
         } catch (CourseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
@@ -164,10 +164,10 @@ public class AssessmentController {
 
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found, Please register or login first");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
         }
         if (!(user  instanceof Student)) {
-            return ResponseEntity.status(403).body("You are not authorized to get the grade");
+            return ResponseEntity.status(403).body("No está autorizado para obtener la calificación");
         }
         try {
             int grade = assessmentService.getQuizGrade(quizTitle,courseName,(Student) user );
@@ -185,10 +185,10 @@ public class AssessmentController {
             String email = SecurityContextHolder.getContext().getAuthentication().getName();
             User user = userService.getUserByEmail(email);
             if (user == null) {
-                return ResponseEntity.badRequest().body("User not found, Please register or login first");
+                return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
             }
             if (!(user  instanceof Instructor)) {
-                return ResponseEntity.status(403).body("You are not authorized to create an assignment");
+                return ResponseEntity.status(403).body("No está autorizado para crear una tarea");
             }
             Instructor instructor = (Instructor) user;
             // retrieving course
@@ -209,7 +209,7 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found, Please register or login first");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
         }
         // only instructor and student are authorized
         if (user instanceof Instructor || user instanceof Student) {
@@ -225,7 +225,7 @@ public class AssessmentController {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized to view this course assignment list: " + e.getMessage());
             }
         }
-        return ResponseEntity.status(403).body("You are not authorized to view assignments.");
+        return ResponseEntity.status(403).body("No está autorizado para ver las tareas.");
     }
 
     @GetMapping("/assignment/{assignment_id}/view")     // "/view-assignment/{id}"
@@ -235,7 +235,7 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            return ResponseEntity.badRequest().body("User not found, Please register or login first");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero");
         }
         // only instructor and student are authorized
         if (user instanceof Instructor || user instanceof Student) {
@@ -257,7 +257,7 @@ public class AssessmentController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
             }
         }
-        return ResponseEntity.status(403).body("You are not authorized to view assignments.");
+        return ResponseEntity.status(403).body("No está autorizado para ver las tareas.");
     }
 
     @PostMapping("/assignment/{assignment_id}/submit")   // "submit-assignment/{assignment_id}"
@@ -268,13 +268,13 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if(user == null){
-            return ResponseEntity.badRequest().body("User not found, Please register or login first.");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero.");
         }
         if(!(user instanceof Student)) {
-            return ResponseEntity.status(403).body("You are not authorized to submit assignments.");
+            return ResponseEntity.status(403).body("No está autorizado para enviar tareas.");
         }
         if(!file.getOriginalFilename().endsWith(".pdf")){
-            return ResponseEntity.badRequest().body("Only PDF files are allowed.");
+            return ResponseEntity.badRequest().body("Solo se permiten archivos PDF.");
         }
         Student student = (Student) user;
         Course course = courseService.getCourse(courseName);
@@ -301,10 +301,10 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if(user == null){
-            return ResponseEntity.badRequest().body("User not found, Please register or login first.");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero.");
         }
         if(!(user instanceof Instructor)) {
-            return ResponseEntity.status(403).body("You are not authorized to view students' submissions list.");
+            return ResponseEntity.status(403).body("No está autorizado para ver la lista de envíos de los estudiantes.");
         }
         try {
             Course course = courseService.getCourse(courseName);
@@ -331,10 +331,10 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if(user == null){
-            return ResponseEntity.badRequest().body("User not found, Please register or login first.");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero.");
         }
         if(!(user instanceof Instructor)) {
-            return ResponseEntity.status(403).body("You are not authorized to view a students' submissions.");
+            return ResponseEntity.status(403).body("No está autorizado para ver los envíos de los estudiantes.");
         }
         try {
             Course course = courseService.getCourse(courseName);
@@ -363,10 +363,10 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if(user == null){
-            return ResponseEntity.badRequest().body("User not found, Please register or login first.");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero.");
         }
         if(!(user instanceof Instructor)) {
-            return ResponseEntity.status(403).body("You are not authorized to grade a students' submissions.");
+            return ResponseEntity.status(403).body("No está autorizado para calificar los envíos de los estudiantes.");
         }
         try {
             Course course = courseService.getCourse(courseName);
@@ -394,10 +394,10 @@ public class AssessmentController {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(email);
         if(user == null){
-            return ResponseEntity.badRequest().body("User not found, Please register or login first.");
+            return ResponseEntity.badRequest().body("Usuario no encontrado. Regístrese o inicie sesión primero.");
         }
         if(!(user instanceof Student)) {
-            return ResponseEntity.status(403).body("You are not authorized to view a submission's grade.");
+            return ResponseEntity.status(403).body("No está autorizado para ver la calificación de un envío.");
         }
         try {
             Student student = (Student) user;

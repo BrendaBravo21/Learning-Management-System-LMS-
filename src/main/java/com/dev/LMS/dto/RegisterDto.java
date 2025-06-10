@@ -5,18 +5,18 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
 public class RegisterDto {
-    @NotNull(message = "Name is required")
+    @NotNull(message = "El nombre es obligatorio")
     private String name;
 
-    @NotNull(message = "Email is required")
-    @Email(message = "Invalid email format")
+    @NotNull(message = "El correo es obligatorio")
+    @Email(message = "Formato de correo inválido")
     private String email;
 
-    @NotNull(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @NotNull(message = "La contraseña es obligatoria")
+    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
     private String password;
 
-    @NotNull(message = "Role is required")
+    @NotNull(message = "El rol es obligatorio")
     private String role;
 
     // Getters and Setters

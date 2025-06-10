@@ -74,7 +74,7 @@ public class UserController {
             user.setPassword(registerDto.getPassword());
 
             userService.register(user);
-            response.put("message", "User registered successfully");
+            response.put("message", "Usuario registrado exitosamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("message", "Error: " + e.getMessage());

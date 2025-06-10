@@ -5,15 +5,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
 public class UpdateProfileDto {
-    @NotNull(message = "Name is required")
+    @NotNull(message = "El nombre es obligatorio")
      private String name;
 
-    @Email(message = "Invalid email format")
-    @NotNull(message = "Email is required")
+    @Email(message = "Formato de correo inválido")
+    @NotNull(message = "El correo es obligatorio")
      private  String email;
 
-    @NotNull(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @NotNull(message = "La contraseña es obligatoria")
+    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
      private  String password;
 
 

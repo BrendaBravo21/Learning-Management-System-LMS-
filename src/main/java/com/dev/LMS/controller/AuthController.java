@@ -36,7 +36,7 @@ public class AuthController {
 
 
             userService.register(user);
-            response.put("message", "User registered successfully");
+            response.put("message", "Usuario registrado exitosamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.put("message", "Error: " + e.getMessage());
@@ -51,16 +51,16 @@ public class AuthController {
         if (user != null) {
             user.setPassword(userdto.getPassword());
         } else {
-            response.put("message", "Invalid login credentials.");
+            response.put("message", "Credenciales de inicio de sesión inválidas.");
             return ResponseEntity.badRequest().body(response);
         }
         try {
             if (user.getEmail() == null || user.getPassword() == null) {
-                response.put("message", "Email and password are required.");
+                response.put("message", "Se requieren correo y contraseña.");
                 return ResponseEntity.badRequest().body(response);
             }
             String token = userService.login(user);
-            response.put("message", "Login successful");
+            response.put("message", "Inicio de sesión exitoso");
             response.put("token", token);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
