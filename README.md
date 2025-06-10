@@ -1,141 +1,137 @@
-# Learning Management System (LMS)
-A learning management system backend API designed to manage and organize courses, assessments (quizzes, assignments), student enrollment, performance tracking, and grading. Built using Java Spring Boot, it implements a layered architecture for scalability and separation of concerns. It provides robust and efficient user authentication, course content management, and progress monitoring.
+# Sistema de Gestión de Aprendizaje (LMS) - Learning-Management-System-LMS
+Una API backend para un sistema de gestión de aprendizaje diseñada para administrar y organizar cursos, evaluaciones (quizzes, tareas), inscripción de estudiantes, seguimiento del rendimiento y calificaciones. Construida con Java Spring Boot, implementa una arquitectura por capas para escalabilidad y separación de responsabilidades. Proporciona autenticación robusta de usuarios, gestión de contenido del curso y monitoreo del progreso.
 
-## Features
+## Funcionalidades
 
-### 1. User Authentication
-- Registration & Login: Using JWT tokens.
-- Role-based access: Restrict access permissions so that they are granted based on role type.
+### 1. Autenticación de Usuarios
+- Registro e inicio de sesión: Utilizando tokens JWT.
+- Acceso basado en roles: Restringe los permisos de acceso según el tipo de rol.
 
+### 2. Gestión de Usuarios
+- Tipos de usuarios: Administrador, Instructor, Estudiante.
+- Gestión de perfil: Ver y actualizar detalles del perfil.
+- Funciones del Administrador:
+    - Administrar configuraciones generales del sistema.
+    - Crear y gestionar usuarios.
+    - Crear y gestionar cursos.
+- Funciones del Instructor:
+    - Crear y gestionar cursos y su contenido.
+    - Agregar tareas y cuestionarios.
+    - Calificar a los estudiantes y proporcionar retroalimentación.
+    - Eliminar estudiantes de los cursos.
+- Funciones del Estudiante:
+    - Inscribirse en cursos.
+    - Acceder a materiales del curso.
+    - Entregar tareas y presentar cuestionarios.
+    - Ver calificaciones de tareas y cuestionarios.
 
-### 2. User Management
-- User types: Admin, Instructor, Student.
-- Profile management: View and update profile details.
-- Admin Roles:
-    - Manage overall system settings.
-    - Create and manage users.
-    - Create and manage courses.
-- Instructor Roles:
-    - Create and manage courses and course content.
-    - Add assignments and quizzes.
-    - Grade students and provide feedback.
-    - Remove students from courses.
-- Student Roles:
-    - Enroll in courses.
-    - Access course materials.
-    - Submit assignments and take quizzes.
-    - View grades for assignments and quizzes.
+### 3. Gestión de Cursos
+- Creación de cursos: Los cursos pueden crearse con título, descripción y duración.
+- Consulta de cursos: Los cursos pueden ser explorados por instructores y estudiantes.
+- Inscripción a cursos: Un estudiante puede inscribirse en cualquier curso disponible.
+- Gestión de lecciones: Cada curso puede tener múltiples lecciones accesibles para instructores y estudiantes inscritos.
+- Recursos de lecciones: Cada lección puede incluir varios recursos (videos, PDF, audio).
+- Asistencia a lecciones: El instructor genera OTPs para registrar asistencia. Los estudiantes la confirman ingresando el OTP.
 
+### 4. Evaluaciones y Calificaciones
+- Banco de preguntas: Cada curso tiene un banco de preguntas donde los instructores pueden agregar diferentes tipos de preguntas (Opción múltiple, verdadero/falso, respuestas cortas).
+- Creación de evaluaciones: Los instructores pueden publicar quizzes y tareas.
+- Envío de quizzes: Cada estudiante recibe preguntas aleatorias del banco de preguntas.
+- Envío de tareas: Los estudiantes suben archivos que serán calificados.
+- Calificación: Automática para quizzes; revisión manual para tareas.
+- Seguimiento de rendimiento: Los estudiantes pueden monitorear sus calificaciones, entregas y asistencia.
 
-### 3. Course Management
-- Course creation: Courses can be created with details such as title, description, and duration.
-- Course retrieval: Courses can be browsed and accessed by instructors and students.
-- Course Enrollment: A student can enroll in any of the available courses.
-- Lesson management: Each course can have multiple lessons that course instructors and enrolled students can access.
-- Lesson resources: A lesson can have multiple resources (videos, PDFs, audio).
-- Lesson Attendance: The course instructor generates OTPs for each lesson to track attendance. Students confirm attendance by entering the OTP.
-
-
-### 4. Assessment & Grading
-- Question bank: Each course has a question bank in which instructors can add questions of different types of questions (MCQs, true/false, short answers).
-- Assessment creation: Instructors can create announcements for quizzes and assignments.
-- Quiz submission: Each student gets randomized questions from the question bank.
-- Assignment submission: Students upload assignment files to be graded.
-- Grading: Automated grading for quizzes, while assignments require manual review
-- Performance Tracking: Students can monitor their quiz scores, assignment submissions, and attendance.
-
-
-### 5. Notifications
-- Student notifications: Receive notifications and email alerts for enrollment confirmations, graded assignments, and course updates.
-- Instructor notifications: Receive notifications and email alerts for new enrollments and course-related updates.
+### 5. Notificaciones
+- Notificaciones a estudiantes: Reciben alertas por correo y en la plataforma por inscripciones, tareas calificadas y actualizaciones de cursos.
+- Notificaciones a instructores: Reciben alertas por nuevos inscritos y cambios en sus cursos.
 
 ---
 
-## API Endpoints
+## Endpoints de la API
 
-### Authentication
-- **Register:** `POST /register` - Register a new user with role, name, email, and password.
-- **Login:** `POST /login` - Authenticate a user and return a JWT token.
+### Autenticación
+- **Registrar:** `POST /register` - Registra un nuevo usuario con rol, nombre, correo y contraseña.
+- **Iniciar sesión:** `POST /login` - Autentica al usuario y retorna un token JWT.
 
-### Users
-- **Get Profile**  `GET /profile` - Retrieve the profile of the currently authenticated user.
-- **Update Profile** `PUT /profile` - Update the profile of the currently authenticated user.
-- **Get all Users** `GET /users` - Retrieve a list of all users.
-- **Get User** `GET /users/{id}` - Retrieve the details of a specific user by their ID.
-- **Create User** `POST /users/create` - Creates a new user with the provided details.
-- **Delete User** `DELETE /users/delete/{id}` - Delete a user by their ID.
-- **User Notifications**  `GET /notifications` - Retrieves all notifications for the currently authenticated user.
+### Usuarios
+- **Obtener perfil:** `GET /profile` - Recupera el perfil del usuario autenticado.
+- **Actualizar perfil:** `PUT /profile` - Actualiza el perfil del usuario autenticado.
+- **Obtener todos los usuarios:** `GET /users` - Lista todos los usuarios.
+- **Obtener usuario por ID:** `GET /users/{id}` - Detalles de un usuario específico por ID.
+- **Crear usuario:** `POST /users/create` - Crea un nuevo usuario con los datos proporcionados.
+- **Eliminar usuario:** `DELETE /users/delete/{id}` - Elimina un usuario por ID.
+- **Notificaciones del usuario:** `GET /notifications` - Lista todas las notificaciones del usuario autenticado.
 
-### Courses
-- **Create Course:** `POST /create-course` - Create a new course (Instructor only).
-- **Search Course:** `GET /search-course/{courseName}` - Search by course name.
-- **Get Course by ID:** `GET /course/{id}` - Retrieve course details by ID.
-- **Get All Courses:** `GET /get-all-courses` - List all courses.
-- **Get My Courses:** `GET /get-my-courses` - List courses created/enrolled by the user.
+### Cursos
+- **Crear curso:** `POST /create-course` - Crea un nuevo curso (solo Instructor).
+- **Buscar curso:** `GET /search-course/{courseName}` - Busca por nombre del curso.
+- **Obtener curso por ID:** `GET /course/{id}` - Recupera detalles de un curso por ID.
+- **Listar todos los cursos:** `GET /get-all-courses` - Lista todos los cursos.
+- **Mis cursos:** `GET /get-my-courses` - Lista cursos creados o inscritos por el usuario.
 
-### Lessons
-- **Add Lesson:** `POST /course/{courseName}/add-lesson` - Add a lesson to a course (Instructor only).
-- **Get All Lessons:** `GET /course/{courseName}/lessons` - List lessons in a course.
-- **Get Lesson:** `GET /course/{courseName}/lessons/{lessonId}` - Retrieve specific lesson details.
-- **Add Resource:** `POST /course/{courseName}/lessons/{lessonId}/add-resource` - Add a file to a lesson (Instructor only).
-- **Get All Resources:** `GET /course/{courseName}/lessons/{lessonId}/resources` - List lesson resources.
-- **Get Resource:** `GET /course/{courseName}/lessons/{lessonId}/resources/{resourceId}` - Download a specific resource.
+### Lecciones
+- **Agregar lección:** `POST /course/{courseName}/add-lesson` - Agrega una lección al curso (solo Instructor).
+- **Listar lecciones:** `GET /course/{courseName}/lessons` - Lista lecciones del curso.
+- **Ver lección:** `GET /course/{courseName}/lessons/{lessonId}` - Detalles de una lección específica.
+- **Agregar recurso:** `POST /course/{courseName}/lessons/{lessonId}/add-resource` - Agrega archivo a una lección (solo Instructor).
+- **Listar recursos:** `GET /course/{courseName}/lessons/{lessonId}/resources` - Lista de recursos por lección.
+- **Ver recurso:** `GET /course/{courseName}/lessons/{lessonId}/resources/{resourceId}` - Descarga un recurso específico.
 
-### Enrollment
-- **Enroll:** `POST /course/{courseName}/enroll` - Enroll in a course (Student only).
-- **Get Enrolled Students:** `GET /course/{courseName}/enrolled` - List enrolled students (Instructor only).
-- **Remove Student:** `DELETE /course/{courseName}/remove-student/{studentId}` - Remove a student (Instructor only).
+### Inscripciones
+- **Inscribirse:** `POST /course/{courseName}/enroll` - Inscribirse a un curso (solo Estudiante).
+- **Ver inscritos:** `GET /course/{courseName}/enrolled` - Lista de estudiantes inscritos (solo Instructor).
+- **Eliminar estudiante:** `DELETE /course/{courseName}/remove-student/{studentId}` - Elimina a un estudiante (solo Instructor).
 
-### Quizzes
-- **Create Question:** `POST /course/{course-name}/create-question` - Create a new question for a specific course.
-- **Get Questions:** `GET /course/{course-name}/get-questions` - Retrieve all questions for a specific course.
-- **Get Question by ID:** `GET /course/{course-name}/get-question-by-id` - Retrieve a specific question by its ID for a course.
-- **Create Quiz:** `POST /course/{course-name}/create-quiz` - Create a new quiz for a specific course.
-- **Take Quiz:** `GET /course/{course-name}/{quizName}/take-quiz` - Start a quiz for a specific course as a student.
-- **Submit Quiz:** `POST /course/{course-name}/{quizName}/submit-quiz` - Submit quiz answers for a specific course.
+### Cuestionarios
+- **Crear pregunta:** `POST /course/{course-name}/create-question` - Crea una nueva pregunta para un curso.
+- **Obtener preguntas:** `GET /course/{course-name}/get-questions` - Lista todas las preguntas del curso.
+- **Obtener pregunta por ID:** `GET /course/{course-name}/get-question-by-id` - Ver pregunta específica por ID.
+- **Crear quiz:** `POST /course/{course-name}/create-quiz` - Crea un nuevo quiz para un curso.
+- **Tomar quiz:** `GET /course/{course-name}/{quizName}/take-quiz` - Inicia un quiz (solo Estudiante).
+- **Enviar quiz:** `POST /course/{course-name}/{quizName}/submit-quiz` - Envío de respuestas del quiz.
 
-### Assignments
-- **Create Assignment:** `POST /course/{course-name}/create-assignment` - Create a new assignment for a specific course.
-- **Get Assignments:** `GET /course/{course-name}/assignments` - Retrieve all assignments for a specific course.
-- **View Assignment:** `GET /course/{course-name}/assignment/{assignment_id}/view` - Retrieve details of a specific assignment in a course.
-- **Submit Assignment:** `POST /course/{course-name}/assignment/{assignment_id}/submit` - Submit an assignment for a specific course.
-- **Get Assignment Submissions:** `GET /course/{course-name}/assignment/{assignment_id}/submissions` - Retrieve all submissions for a specific assignment.
-- **Get Assignment Submission by ID:** `GET /course/{course-name}/assignment/{assignment_id}/submission/{submission_id}` - Retrieve a specific student's assignment submission.
+### Tareas
+- **Crear tarea:** `POST /course/{course-name}/create-assignment` - Crea una nueva tarea para el curso.
+- **Ver tareas:** `GET /course/{course-name}/assignments` - Lista todas las tareas del curso.
+- **Ver tarea específica:** `GET /course/{course-name}/assignment/{assignment_id}/view` - Detalles de una tarea específica.
+- **Entregar tarea:** `POST /course/{course-name}/assignment/{assignment_id}/submit` - Entrega de tarea.
+- **Ver entregas:** `GET /course/{course-name}/assignment/{assignment_id}/submissions` - Lista de entregas de una tarea.
+- **Ver entrega específica:** `GET /course/{course-name}/assignment/{assignment_id}/submission/{submission_id}` - Ver entrega de un estudiante.
 
-### Grading and Performance
-- **Get Quiz Grade:** `GET /course/{course-name}/{quizName}/grade` - Retrieve the grade for a specific quiz.
-- **Grade Assignment Submission:** `PUT /course/{course-name}/assignment/{assignment_id}/submission/{submission_id}/grade` - Grade a student's assignment submission.
-- **Get Assignment Grade:** `GET /course/{course-name}/assignment/{assignment_id}/get-grade` - Retrieve a student's grade for a specific assignment.
+### Calificaciones y Rendimiento
+- **Ver calificación de quiz:** `GET /course/{course-name}/{quizName}/grade` - Calificación de un quiz específico.
+- **Calificar tarea:** `PUT /course/{course-name}/assignment/{assignment_id}/submission/{submission_id}/grade` - Califica una tarea.
+- **Ver calificación de tarea:** `GET /course/{course-name}/assignment/{assignment_id}/get-grade` - Calificación de una tarea específica.
 
 ---
 
-## Getting Started
+## Primeros Pasos para realizar las pruebas e instalación 
 
-### **Prerequisites**
+### **Requisitos previos**
 - Java 17+
 - Spring Boot
 - Maven
 - PostgreSQL
 
-### **Installation**
-### 1. Clone the repository:
+### **Instalación**
+#### 1. Clonar el repositorio:
 ```bash
 git clone https://github.com/omarse7a/Learning-Management-System.git
 cd Learning-Management-System
 ```
-### 2. Configure application.yml:
-- add your database info in the datasource property.
-- add your email info in the mail property
 
-### 3. Build the project:
+#### 2. Configurar `application.yml`:
+- Agrega la información de tu base de datos en la propiedad `datasource`.
+- Agrega la información de correo en la propiedad `mail`.
+
+#### 3. Compilar el proyecto:
 ```bash
 mvn clean install
 ```
 
-### 4. Run the application:
+#### 4. Ejecutar la aplicación:
 ```bash
 mvn spring-boot:run
 ```
-or run Application.java from the IDE you're using
-
+O ejecuta `Application.java` desde el IDE que estés utilizando.
 
