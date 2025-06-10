@@ -116,7 +116,7 @@ Una API backend para un sistema de gestión de aprendizaje diseñada para admini
 ### **Instalación**
 #### 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/omarse7a/Learning-Management-System.git
+git clone https://github.com/BrendaBravo21/Learning-Management-System-LMS-.git
 cd Learning-Management-System
 ```
 
